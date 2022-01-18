@@ -1,20 +1,23 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 // import * as ReactDOM from "react-dom";
 import {
   Grid,
-  GridColumn as Column,
-  GridSortChangeEvent,
+  GridColumn as Column
 } from "@progress/kendo-react-grid";
-import { orderBy, SortDescriptor } from "@progress/kendo-data-query";
+import {process } from "@progress/kendo-data-query";
 
-const products = require("../../../src/products.json");
+const products = require("../../../src/userDb.json");
 
-const initialSort: Array<SortDescriptor> = [
-  { field: "ProductName", dir: "asc" },
-];
+const initialDataState = {}
 
 const DataGridPage:React.FC = () => {
-  const [sort, setSort] = useState(initialSort);
+  const [dataState,setDataState] = useState()
+  const [resultState,setResultState] = useState(process(products,initialDataState))
+
+  const onDataStateChange = useCallback((e)=>{
+    setDataState(e.dataState)
+    setResultState(process(products,e.dataState))
+  },[])
   return (
     <>
       <div className="data-grid-page">
@@ -22,16 +25,15 @@ const DataGridPage:React.FC = () => {
           style={{
             height: "300px",
           }}
-          data={orderBy(products, sort)}
+          data={{data:resultState.data}}
           sortable={true}
-          sort={sort}
-          onSortChange={(e: GridSortChangeEvent) => {
-            setSort(e.sort);
-          }}
+          filterable={true}
+          onDataStateChange={onDataStateChange}{...dataState}
         >
-          <Column field="ProductID" />
-          <Column field="ProductName" title="Product Name" />
-          <Column field="UnitPrice" title="Unit Price" />
+          <Column field="userName" title="USERNAME"filterable={false}/>
+          <Column field="fullName" title="FULLNAME" />
+          <Column field="lastLogin" title="LAST LOG IN" filterable={false} />
+          <Column field="enabled" title="ENABLED" filterable={false} />
         </Grid>
       </div>
     </>
