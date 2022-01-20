@@ -3,21 +3,21 @@
         "id":1,
         "userName":"mugishaderick",
         "fullName":"Mugisha Derick",
-        "lastLogin":"datetime",
+        "lastLogin":"01/19/2022, 02:16:58 AM",
         "enabled":false
     },
     {
         "id":2,
         "userName":"adtester",
         "fullName":"Tom Dause",
-        "lastLogin":"datetime",
+        "lastLogin":"01/19/2022, 02:16:58 AM",
         "enabled":true
     },
     {
         "id":3,
         "userName":"testerTester",
         "fullName":"Lol Lol",
-        "lastLogin":"datetime",
+        "lastLogin":"01/19/2022, 02:16:58 AM",
         "enabled":false
     }
 ]
